@@ -37,7 +37,7 @@ export default function Form() {
           <input
             className="input-message"
             type="text"
-            placeholder="The message..."
+            placeholder="Type your message"
           />
           <br />
         </p>
