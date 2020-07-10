@@ -5,9 +5,12 @@ import "./App.css";
 
 function App() {
   return (
-    <div>
+    <div>    <header className="App-header">Chat App</header>
+
+    <div className="App">
       <Form />
       <Chat />
+    </div>
     </div>
   );
 }

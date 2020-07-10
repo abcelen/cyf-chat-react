@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Form() {
+  const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
+
   const api = "https://abcelen-chat-server.herokuapp.com/messages";
+  // const api = "http://localhost:5000/messages";
   const handleAdd = () => {
     fetch(api, {
       method: "POST",
@@ -9,8 +13,8 @@ export default function Form() {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        from: document.querySelector(".input-name").value,
-        text: document.querySelector(".input-message").value,
+        from: name,
+        text: message,
       }),
     })
       .then((res) => res.json())
@@ -20,28 +24,34 @@ export default function Form() {
   };
 
   return (
-    <div className="App">
-      <header className=""></header>
-      <h1>Send a Message</h1>
-      <form>
+    <div className="message-card">
+      <h2>Send a Message</h2>
+      <form className="col-md-4" onSubmit={handleAdd}>
         <p>
           Name:{" "}
           <input
-            className="input-name"
+            className="form-control"
             type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             name="from"
             placeholder="Your Name"
           />{" "}
           <br />
           Message:{" "}
-          <input
-            className="input-message"
-            type="text"
-            placeholder="Type your message"
-          />
+          <div className="message-text">
+            <input
+              className="form-control"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              type="text"
+              name="message"
+              placeholder="Type your message"
+            />
+          </div>
           <br />
         </p>
-        <button onClick={() => handleAdd()} type="submit">
+        <button type="submit" className="btn btn-primary">
           Send
         </button>
       </form>

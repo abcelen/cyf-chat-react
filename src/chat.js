@@ -2,27 +2,49 @@ import React, { useState, useEffect } from "react";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
-  //   const api = "https://abcelen-chat-server.herokuapp.com/messages/${id}";
+  const api = "https://abcelen-chat-server.herokuapp.com/messages";
+
+  // const api = "http://localhost:5000/messages";
+
   const handleDelete = (id) => {
-    fetch(`https://abcelen-chat-server.herokuapp.com/messages/${id}`, {
+    fetch(`${api}/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then((data) => setMessages(data));
   };
   useEffect(() => {
-    fetch("https://abcelen-chat-server.herokuapp.com/messages")
+    fetch(api)
       .then((res) => res.json())
       .then((data) => setMessages(data));
   }, []);
   return (
-    <div>
+    <div className="message-card">
       {messages.map((message, index) => (
-        <div key={index}>
-          <p>{message.from}</p>
-          <p>{message.text}</p>
-          <p>{message.timeStamp}</p>
-          <button onClick={() => handleDelete(message.id)}> Delete </button>
+        <div className="message-container" key={index}>
+          <div>
+            {" "}
+            <p>From: {message.from}</p>
+          </div>
+          <div className="p-message">
+            {" "}
+            <p className="message">{message.text}</p>
+          </div>
+
+          <div>
+            {" "}
+            <p>Sent: {message.timeStamp}</p>
+          </div>
+          <div>
+            {" "}
+            <button
+              className="btn btn-secondary"
+              onClick={() => handleDelete(message.id)}
+            >
+              {" "}
+              Delete{" "}
+            </button>
+          </div>
         </div>
       ))}
     </div>
