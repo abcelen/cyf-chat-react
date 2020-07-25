@@ -15,6 +15,7 @@ export default function Form() {
       body: JSON.stringify({
         from: name,
         text: message,
+
       }),
     })
       .then((res) => res.json())
@@ -26,8 +27,8 @@ export default function Form() {
   return (
     <div className="message-card">
       <h2>Send a Message</h2>
-      <form className="col-md-4" onSubmit={handleAdd}>
-        <p>
+      <form className="col-md-4" onSubmit={handleAdd()}>
+        <div>
           Name:{" "}
           <input
             className="form-control"
@@ -50,7 +51,7 @@ export default function Form() {
             />
           </div>
           <br />
-        </p>
+        </div>
         <button type="submit" className="btn btn-primary">
           Send
         </button>
